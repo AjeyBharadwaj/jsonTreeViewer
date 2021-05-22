@@ -1,4 +1,4 @@
-# jsonTreeViewer and jsonTree library
+# jsonTreeViewer and jsonTree library (With load from file option)
 
 The library and the viewer released under the MIT license (LICENSE.txt).
 
