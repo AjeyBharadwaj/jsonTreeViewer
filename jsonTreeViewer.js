@@ -52,16 +52,36 @@ var jsonTreeViewer = (function() {
             var form = self.content_el,
                 code_input = document.getElementById('code_input'),
                 load_button = document.getElementById('load_code_button');
+                //load_file_button = document.getElementById('load_file_button');
             
-            function load(e) {
-                jsonTreeViewer.parse(code_input.value);
+            function load(data) {
+                jsonTreeViewer.parse(data);
                 self.hide();
                 code_input.value = '';
+            }
+
+            function load_str(e) {
+                load(code_input.value);
             
                 e.preventDefault();
             }
             
-            load_button.addEventListener('click', load, false);
+            function load_file() {
+                var files = this.files;
+                if (files.length === 0) {
+                    console.log('No file is selected');
+                    return;
+                }
+            
+                var reader = new FileReader();
+                reader.onload = function(event) {
+                    load(event.target.result);
+                };
+                reader.readAsText(files[0]);
+            }
+
+            load_button.addEventListener('click', load_str, false);
+            load_file_button.addEventListener('change', load_file)
         }
     });
     
