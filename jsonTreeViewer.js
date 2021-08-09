@@ -50,10 +50,8 @@ var jsonTreeViewer = (function() {
         overlay : true,
         js_module : function(self) {
             var form = self.content_el,
-                code_input = document.getElementById('code_input'),
-                load_button = document.getElementById('load_code_button');
+            	code_input = document.getElementById('code_input');
                 //load_file_button = document.getElementById('load_file_button');
-            
             function load(data) {
                 jsonTreeViewer.parse(data);
                 self.hide();
@@ -66,8 +64,8 @@ var jsonTreeViewer = (function() {
                 e.preventDefault();
             }
             
-            function load_file() {
-                var files = this.files;
+            function handleFileSelect(evt) {
+    			var files = evt.target.files;
                 if (files.length === 0) {
                     console.log('No file is selected');
                     return;
@@ -80,8 +78,8 @@ var jsonTreeViewer = (function() {
                 reader.readAsText(files[0]);
             }
 
-            load_button.addEventListener('click', load_str, false);
-            load_file_button.addEventListener('change', load_file)
+			document.getElementById('files').addEventListener('change', handleFileSelect, false);
+            //load_file_button.addEventListener('click', load_file)
         }
     });
     
